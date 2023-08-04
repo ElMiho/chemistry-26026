@@ -1,0 +1,1282 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     56632,       1274]
+NotebookOptionsPosition[     52604,       1199]
+NotebookOutlinePosition[     53030,       1216]
+CellTagsIndexPosition[     52987,       1213]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+First we define a couple of constants using \[OpenCurlyDoubleQuote]Quantity\
+\[CloseCurlyDoubleQuote] - if all calculations use this, then no conversion \
+is needed!\
+\>", "Text",
+ CellChangeTimes->{{3.900084969995839*^9, 3.9000849874037437`*^9}, {
+  3.900085203468583*^9, 3.900085229658616*^9}, {3.900085268963235*^9, 
+  3.90008527172635*^9}},ExpressionUUID->"e73c85ba-55f1-4aa8-8502-\
+1c94d634ff56"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"R", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"0.08206", ",", "\"\<L*atm/(K*mol)\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{
+     RowBox[{"3", "*", 
+      RowBox[{"10", "^", "8"}]}], ",", "\"\<m/s\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"h", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{
+     RowBox[{"6.63", "*", 
+      RowBox[{"10", "^", 
+       RowBox[{"(", 
+        RowBox[{"-", "34"}], ")"}]}]}], ",", "\"\<J*s\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"RH", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{
+     RowBox[{"2.18", "*", 
+      RowBox[{"10", "^", 
+       RowBox[{"(", 
+        RowBox[{"-", "18"}], ")"}]}]}], ",", "\"\<J\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NA", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{
+     RowBox[{"6.022", "*", 
+      RowBox[{"10", "^", 
+       RowBox[{"(", "23", ")"}]}]}], ",", "\"\<mol^(-1)\>\""}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.900084991308967*^9, 3.900085044267136*^9}, {
+   3.9000850913605003`*^9, 3.900085113866634*^9}, {3.900085151527533*^9, 
+   3.900085175808055*^9}, {3.900085250357317*^9, 3.900085261155162*^9}, {
+   3.9000857777731857`*^9, 3.9000857930085783`*^9}, 3.9000862441316767`*^9, {
+   3.9001285612004766`*^9, 3.900128561538658*^9}, {3.900128899427356*^9, 
+   3.900128945546163*^9}},
+ CellLabel->
+  "In[360]:=",ExpressionUUID->"455475e4-125c-4574-a34f-6a88e0740b11"],
+
+Cell["To work with a chemical compound we use", "Text",
+ CellChangeTimes->{{3.9000852752173157`*^9, 
+  3.900085308634137*^9}},ExpressionUUID->"a761e629-c8af-4f6a-97ee-\
+c40283a0516c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ChemicalFormula", "[", "\"\<BrO4^(2-)\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.9000853116916523`*^9, 3.900085341167527*^9}},
+ CellLabel->
+  "In[304]:=",ExpressionUUID->"af1e5930-e970-4348-8e3e-103023a0f2c7"],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   TooltipBox[
+    FrameBox[
+     StyleBox[
+      TemplateBox[{
+        TemplateBox[{"\"Br\"", 
+          SubscriptBox["\"O\"", "4"]}, "RowDefault"], 
+        TemplateBox[{"2", "\"-\""}, "RowDefault"]},
+       "Superscript"],
+      StripOnInput->False,
+      ScriptBaselineShifts->{0.5, 0.75},
+      ShowStringCharacters->False,
+      FontFamily->"Roboto"],
+     Alignment->Center,
+     Background->Dynamic[
+       If[
+        CurrentValue["MouseOver"], 
+        RGBColor[0.9529411764705882, 0.9882352941176471, 1.], White]],
+     FrameMargins->{{4, 4}, {3, 2}},
+     FrameStyle->RGBColor[
+      0.403921568627451, 0.803921568627451, 0.9490196078431372],
+     RoundingRadius->5,
+     StripOnInput->False],
+    TagBox[
+     GridBox[{{"\"ChemicalFormula\""}, {
+        TemplateBox[{"\"mass: \"", 
+          
+          TemplateBox[{
+           "143.9010971598181248114`5.000003310845391", "\"u\"", 
+            "unified atomic mass units", "\"AtomicMassUnit\""}, "Quantity", 
+           SyntaxForm -> Mod]}, "RowDefault"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+      "Column", 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Column"]],
+   Annotation[#, 
+    Column[{"ChemicalFormula", 
+      Row[{"mass: ", 
+        Quantity[
+        143.9010971598181248114`5.000003310845391, "AtomicMassUnit"]}]}, 
+     Alignment -> Left], "Tooltip"]& ],
+  ChemicalFormula[{"Br" -> 1, "O" -> 4}, <|"NetCharge" -> -2|>],
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->False]], "Output",
+ CellChangeTimes->{{3.900085319223426*^9, 3.900085341727409*^9}, 
+   3.900086248010714*^9},
+ CellLabel->
+  "Out[304]=",ExpressionUUID->"51fd5448-4ba6-4f29-83de-239373bc6088"]
+}, Open  ]],
+
+Cell["which has the properties", "Text",
+ CellChangeTimes->{{3.900085344097334*^9, 
+  3.9000853475283823`*^9}},ExpressionUUID->"749a8e08-c789-40ed-af02-\
+1e363ffac7f0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ChemicalFormula", "[", "\"\<BrO4^(2-)\>\"", "]"}], "[", 
+  "\"\<Properties\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.900085349954591*^9, 3.900085355776373*^9}},
+ CellLabel->
+  "In[305]:=",ExpressionUUID->"54d34d1c-0613-4b44-b441-586ea5ffed19"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"AtomCount\"\>", ",", "\<\"ElementCounts\"\>", 
+   ",", "\<\"ElementMassFraction\"\>", ",", "\<\"EmpiricalFormula\"\>", 
+   ",", "\<\"Formula\"\>", ",", "\<\"FormulaString\"\>", 
+   ",", "\<\"HillFormula\"\>", ",", "\<\"HillFormulaString\"\>", 
+   ",", "\<\"MolarMass\"\>", ",", "\<\"MolecularMass\"\>", 
+   ",", "\<\"NetCharge\"\>", ",", "\<\"Phase\"\>", 
+   ",", "\<\"RelativeMolecularMass\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{3.900085356402586*^9, 3.900086248018632*^9},
+ CellLabel->
+  "Out[305]=",ExpressionUUID->"ecc3fb9d-1800-45e4-bd99-74eda39c45aa"]
+}, Open  ]],
+
+Cell["such as", "Text",
+ CellChangeTimes->{{3.9000853798212223`*^9, 
+  3.900085382379817*^9}},ExpressionUUID->"a7edb8b7-f144-4125-a01b-\
+2108e9295faa"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ChemicalFormula", "[", "\"\<BrO4^(2-)\>\"", "]"}], "[", 
+  "\"\<MolarMass\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.900085386948121*^9, 3.90008538975019*^9}},
+ CellLabel->
+  "In[306]:=",ExpressionUUID->"0e228870-fa86-4e15-8f6d-8601bca5a930"],
+
+Cell[BoxData[
+ TemplateBox[{"143.9010971598181248114`5.000003310845391", 
+   RowBox[{
+    "\"g\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"mol\""}], 
+   "grams per mole", 
+   FractionBox["\"Grams\"", "\"Moles\""]},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.900085390057871*^9, 3.90008624803261*^9},
+ CellLabel->
+  "Out[306]=",ExpressionUUID->"96ea950c-74e7-40bc-b51c-10bb8fda0193"]
+}, Open  ]],
+
+Cell["Chemical reactions are created using", "Text",
+ CellChangeTimes->{{3.9000854028264217`*^9, 
+  3.9000854125095053`*^9}},ExpressionUUID->"aef0c893-09a2-48e7-8a6c-\
+12cc54794dd8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ChemicalReaction", "[", "\"\<Mg(OH)2 -> Mg^(2+) + OH^(-)\>\"", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.900085415434051*^9, 3.900085432631266*^9}},
+ CellLabel->
+  "In[307]:=",ExpressionUUID->"403dc305-eef7-4567-b239-094c0e349975"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox["ChemicalReaction",
+    "SummaryHead"], "[", 
+   DynamicModuleBox[{Typeset`open$$ = False, Typeset`embedState$$ = "Ready"}, 
+    
+    TemplateBox[{
+      PaneSelectorBox[{False -> GridBox[{{
+            GridBox[{{
+               TagBox[
+                PaneBox[
+                 StyleBox[
+                  TemplateBox[{
+                    TemplateBox[{
+                    TagBox[
+                    TooltipBox[
+                    TemplateBox[{"\"Mg\"", 
+                    SubscriptBox[
+                    
+                    TemplateBox[{"\"(\"", "\"O\"", "\"H\"", "\")\""}, 
+                    "RowDefault"], "2"]}, "RowDefault"], 
+                    InterpretationBox[
+                    TagBox[
+                    TooltipBox[
+                    FrameBox[
+                    StyleBox[
+                    TemplateBox[{"\"Mg\"", 
+                    SubscriptBox[
+                    
+                    TemplateBox[{"\"(\"", "\"O\"", "\"H\"", "\")\""}, 
+                    "RowDefault"], "2"]}, "RowDefault"], FontFamily -> 
+                    "Roboto", ShowStringCharacters -> False, 
+                    ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> 
+                    False], RoundingRadius -> 5, 
+                    FrameMargins -> {{4, 4}, {3, 0}}, Alignment -> Center, 
+                    FrameStyle -> 
+                    RGBColor[0.403921568627451, 0.803921568627451, 
+                    0.9490196078431372], Background -> Dynamic[
+                    If[
+                    CurrentValue["MouseOver"], 
+                    RGBColor[0.9529411764705882, 0.9882352941176471, 1.], 
+                    White]], StripOnInput -> False], 
+                    TagBox[
+                    GridBox[{{"\"ChemicalFormula\""}, {
+                    TemplateBox[{"\"mass: \"", 
+                    
+                    TemplateBox[{"58.319`4.882358735080982", "\"u\"", 
+                    "unified atomic mass units", "\"AtomicMassUnit\""}, 
+                    "Quantity", SyntaxForm -> Mod]}, "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]], Annotation[#, 
+                    Column[{"ChemicalFormula", 
+                    Row[{"mass: ", 
+                    Quantity[58.319`4.882358735080982, "AtomicMassUnit"]}]}, 
+                    Alignment -> Left], "Tooltip"]& ], 
+                    ChemicalFormula[{"Mg" -> 1, {"O" -> 1, "H" -> 1} -> 2}], 
+                    Editable -> False, SelectWithContents -> True, Selectable -> 
+                    False]], Annotation[#, 
+                    ChemicalFormula[{"Mg" -> 1, {"O" -> 1, "H" -> 1} -> 2}], 
+                    "Tooltip"]& ]}, "RowDefault"], "\" \[LongRightArrow] \"", 
+                    
+                    TemplateBox[{
+                    TagBox[
+                    TooltipBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"Mg\""}, "RowDefault"], 
+                    TemplateBox[{"2", "\"+\""}, "RowDefault"]}, "Superscript",
+                     SyntaxForm -> SuperscriptBox], 
+                    InterpretationBox[
+                    TagBox[
+                    TooltipBox[
+                    FrameBox[
+                    StyleBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"Mg\""}, "RowDefault"], 
+                    TemplateBox[{"2", "\"+\""}, "RowDefault"]}, "Superscript",
+                     SyntaxForm -> SuperscriptBox], FontFamily -> "Roboto", 
+                    ShowStringCharacters -> False, 
+                    ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> 
+                    False], RoundingRadius -> 5, 
+                    FrameMargins -> {{4, 4}, {3, 2}}, Alignment -> Center, 
+                    FrameStyle -> 
+                    RGBColor[0.403921568627451, 0.803921568627451, 
+                    0.9490196078431372], Background -> Dynamic[
+                    If[
+                    CurrentValue["MouseOver"], 
+                    RGBColor[0.9529411764705882, 0.9882352941176471, 1.], 
+                    White]], StripOnInput -> False], 
+                    TagBox[
+                    GridBox[{{"\"ChemicalFormula\""}, {
+                    TemplateBox[{"\"mass: \"", 
+                    
+                    TemplateBox[{"24.3039028401818751886`4.999980392544869", 
+                    "\"u\"", "unified atomic mass units", 
+                    "\"AtomicMassUnit\""}, "Quantity", SyntaxForm -> Mod]}, 
+                    "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]], Annotation[#, 
+                    Column[{"ChemicalFormula", 
+                    Row[{"mass: ", 
+                    Quantity[
+                    24.3039028401818751886`4.999980392544869, 
+                    "AtomicMassUnit"]}]}, Alignment -> Left], "Tooltip"]& ], 
+                    ChemicalFormula[{"Mg" -> 1}, <|"NetCharge" -> 2|>], 
+                    Editable -> False, SelectWithContents -> True, Selectable -> 
+                    False]], Annotation[#, 
+                    ChemicalFormula[{"Mg" -> 1}, <|"NetCharge" -> 2|>], 
+                    "Tooltip"]& ], "\"\[ThinSpace]+\[ThinSpace]\"", 
+                    TagBox[
+                    TooltipBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"O\"", "\"H\""}, "RowDefault"], "\"-\""}, 
+                    "Superscript", SyntaxForm -> SuperscriptBox], 
+                    InterpretationBox[
+                    TagBox[
+                    TooltipBox[
+                    FrameBox[
+                    StyleBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"O\"", "\"H\""}, "RowDefault"], "\"-\""}, 
+                    "Superscript", SyntaxForm -> SuperscriptBox], FontFamily -> 
+                    "Roboto", ShowStringCharacters -> False, 
+                    ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> 
+                    False], RoundingRadius -> 5, 
+                    FrameMargins -> {{4, 4}, {3, 2}}, Alignment -> Center, 
+                    FrameStyle -> 
+                    RGBColor[0.403921568627451, 0.803921568627451, 
+                    0.9490196078431372], Background -> Dynamic[
+                    If[
+                    CurrentValue["MouseOver"], 
+                    RGBColor[0.9529411764705882, 0.9882352941176471, 1.], 
+                    White]], StripOnInput -> False], 
+                    TagBox[
+                    GridBox[{{"\"ChemicalFormula\""}, {
+                    TemplateBox[{"\"mass: \"", 
+                    
+                    TemplateBox[{"17.0075485799090624057`4.814350784684973", 
+                    "\"u\"", "unified atomic mass units", 
+                    "\"AtomicMassUnit\""}, "Quantity", SyntaxForm -> Mod]}, 
+                    "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]], Annotation[#, 
+                    Column[{"ChemicalFormula", 
+                    Row[{"mass: ", 
+                    Quantity[
+                    17.0075485799090624057`4.814350784684973, 
+                    "AtomicMassUnit"]}]}, Alignment -> Left], "Tooltip"]& ], 
+                    
+                    ChemicalFormula[{"O" -> 1, "H" -> 1}, <|
+                    "NetCharge" -> -1|>], Editable -> False, 
+                    SelectWithContents -> True, Selectable -> False]], 
+                    Annotation[#, 
+                    
+                    ChemicalFormula[{"O" -> 1, "H" -> 1}, <|
+                    "NetCharge" -> -1|>], "Tooltip"]& ]}, "RowDefault"]}, 
+                   "RowDefault"], FontFamily -> "Roboto", "Medium", 
+                  ShowStringCharacters -> False, 
+                  ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> False],
+                  ImageSize -> {{1, 500}, Automatic}, BaselinePosition -> 
+                 Baseline, ContentPadding -> False, FrameMargins -> 0, 
+                 StripOnInput -> True], "SummaryItem"]}}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+             False, GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
+              BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+          GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Top}}}, 
+          AutoDelete -> False, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+          BaselinePosition -> {1, 1}], True -> GridBox[{{
+            GridBox[{{
+               TagBox[
+                PaneBox[
+                 StyleBox[
+                  TemplateBox[{
+                    TemplateBox[{
+                    TagBox[
+                    TooltipBox[
+                    TemplateBox[{"\"Mg\"", 
+                    SubscriptBox[
+                    TemplateBox[{"\"(\"", "\"O\"", "\"H\"", "\")\""}, 
+                    "RowDefault"], "2"]}, "RowDefault"], 
+                    InterpretationBox[
+                    TagBox[
+                    TooltipBox[
+                    FrameBox[
+                    StyleBox[
+                    TemplateBox[{"\"Mg\"", 
+                    SubscriptBox[
+                    
+                    TemplateBox[{"\"(\"", "\"O\"", "\"H\"", "\")\""}, 
+                    "RowDefault"], "2"]}, "RowDefault"], FontFamily -> 
+                    "Roboto", ShowStringCharacters -> False, 
+                    ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> 
+                    False], RoundingRadius -> 5, 
+                    FrameMargins -> {{4, 4}, {3, 0}}, Alignment -> Center, 
+                    FrameStyle -> 
+                    RGBColor[0.403921568627451, 0.803921568627451, 
+                    0.9490196078431372], Background -> Dynamic[
+                    If[
+                    CurrentValue["MouseOver"], 
+                    RGBColor[0.9529411764705882, 0.9882352941176471, 1.], 
+                    White]], StripOnInput -> False], 
+                    TagBox[
+                    GridBox[{{"\"ChemicalFormula\""}, {
+                    TemplateBox[{"\"mass: \"", 
+                    
+                    TemplateBox[{"58.319`4.882358735080982", "\"u\"", 
+                    "unified atomic mass units", "\"AtomicMassUnit\""}, 
+                    "Quantity", SyntaxForm -> Mod]}, "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]], Annotation[#, 
+                    Column[{"ChemicalFormula", 
+                    Row[{"mass: ", 
+                    Quantity[58.319`4.882358735080982, "AtomicMassUnit"]}]}, 
+                    Alignment -> Left], "Tooltip"]& ], 
+                    ChemicalFormula[{"Mg" -> 1, {"O" -> 1, "H" -> 1} -> 2}], 
+                    Editable -> False, SelectWithContents -> True, Selectable -> 
+                    False]], Annotation[#, 
+                    ChemicalFormula[{"Mg" -> 1, {"O" -> 1, "H" -> 1} -> 2}], 
+                    "Tooltip"]& ]}, "RowDefault"], "\" \[LongRightArrow] \"", 
+                    
+                    TemplateBox[{
+                    TagBox[
+                    TooltipBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"Mg\""}, "RowDefault"], 
+                    TemplateBox[{"2", "\"+\""}, "RowDefault"]}, "Superscript",
+                     SyntaxForm -> SuperscriptBox], 
+                    InterpretationBox[
+                    TagBox[
+                    TooltipBox[
+                    FrameBox[
+                    StyleBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"Mg\""}, "RowDefault"], 
+                    TemplateBox[{"2", "\"+\""}, "RowDefault"]}, "Superscript",
+                     SyntaxForm -> SuperscriptBox], FontFamily -> "Roboto", 
+                    ShowStringCharacters -> False, 
+                    ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> 
+                    False], RoundingRadius -> 5, 
+                    FrameMargins -> {{4, 4}, {3, 2}}, Alignment -> Center, 
+                    FrameStyle -> 
+                    RGBColor[0.403921568627451, 0.803921568627451, 
+                    0.9490196078431372], Background -> Dynamic[
+                    If[
+                    CurrentValue["MouseOver"], 
+                    RGBColor[0.9529411764705882, 0.9882352941176471, 1.], 
+                    White]], StripOnInput -> False], 
+                    TagBox[
+                    GridBox[{{"\"ChemicalFormula\""}, {
+                    TemplateBox[{"\"mass: \"", 
+                    
+                    TemplateBox[{"24.3039028401818751886`4.999980392544869", 
+                    "\"u\"", "unified atomic mass units", 
+                    "\"AtomicMassUnit\""}, "Quantity", SyntaxForm -> Mod]}, 
+                    "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]], Annotation[#, 
+                    Column[{"ChemicalFormula", 
+                    Row[{"mass: ", 
+                    Quantity[
+                    24.3039028401818751886`4.999980392544869, 
+                    "AtomicMassUnit"]}]}, Alignment -> Left], "Tooltip"]& ], 
+                    ChemicalFormula[{"Mg" -> 1}, <|"NetCharge" -> 2|>], 
+                    Editable -> False, SelectWithContents -> True, Selectable -> 
+                    False]], Annotation[#, 
+                    ChemicalFormula[{"Mg" -> 1}, <|"NetCharge" -> 2|>], 
+                    "Tooltip"]& ], "\"\[ThinSpace]+\[ThinSpace]\"", 
+                    TagBox[
+                    TooltipBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"O\"", "\"H\""}, "RowDefault"], "\"-\""}, 
+                    "Superscript", SyntaxForm -> SuperscriptBox], 
+                    InterpretationBox[
+                    TagBox[
+                    TooltipBox[
+                    FrameBox[
+                    StyleBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"O\"", "\"H\""}, "RowDefault"], "\"-\""}, 
+                    "Superscript", SyntaxForm -> SuperscriptBox], FontFamily -> 
+                    "Roboto", ShowStringCharacters -> False, 
+                    ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> 
+                    False], RoundingRadius -> 5, 
+                    FrameMargins -> {{4, 4}, {3, 2}}, Alignment -> Center, 
+                    FrameStyle -> 
+                    RGBColor[0.403921568627451, 0.803921568627451, 
+                    0.9490196078431372], Background -> Dynamic[
+                    If[
+                    CurrentValue["MouseOver"], 
+                    RGBColor[0.9529411764705882, 0.9882352941176471, 1.], 
+                    White]], StripOnInput -> False], 
+                    TagBox[
+                    GridBox[{{"\"ChemicalFormula\""}, {
+                    TemplateBox[{"\"mass: \"", 
+                    
+                    TemplateBox[{"17.0075485799090624057`4.814350784684973", 
+                    "\"u\"", "unified atomic mass units", 
+                    "\"AtomicMassUnit\""}, "Quantity", SyntaxForm -> Mod]}, 
+                    "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]], Annotation[#, 
+                    Column[{"ChemicalFormula", 
+                    Row[{"mass: ", 
+                    Quantity[
+                    17.0075485799090624057`4.814350784684973, 
+                    "AtomicMassUnit"]}]}, Alignment -> Left], "Tooltip"]& ], 
+                    
+                    ChemicalFormula[{"O" -> 1, "H" -> 1}, <|
+                    "NetCharge" -> -1|>], Editable -> False, 
+                    SelectWithContents -> True, Selectable -> False]], 
+                    Annotation[#, 
+                    
+                    ChemicalFormula[{"O" -> 1, "H" -> 1}, <|
+                    "NetCharge" -> -1|>], "Tooltip"]& ]}, "RowDefault"]}, 
+                   "RowDefault"], FontFamily -> "Roboto", "Medium", 
+                  ShowStringCharacters -> False, 
+                  ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> False],
+                  ImageSize -> {{1, 500}, Automatic}, BaselinePosition -> 
+                 Baseline, ContentPadding -> False, FrameMargins -> 0, 
+                 StripOnInput -> True], "SummaryItem"]}}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+             False, GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
+              BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+          GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Top}}}, 
+          AutoDelete -> False, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+          BaselinePosition -> {1, 1}]}, 
+       Dynamic[Typeset`open$$], ImageSize -> Automatic]},
+     "SummaryPanel"],
+    DynamicModuleValues:>{}], "]"}],
+  ChemicalReaction[<|
+    ChemicalFormula[{"Mg" -> 1, {"O" -> 1, "H" -> 1} -> 2}] -> 1|> -> <|
+    ChemicalFormula[{"Mg" -> 1}, <|"NetCharge" -> 2|>] -> 1, 
+     ChemicalFormula[{"O" -> 1, "H" -> 1}, <|"NetCharge" -> -1|>] -> 1|>],
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->False]], "Output",
+ CellChangeTimes->{3.900085433018722*^9, 3.9000862480492887`*^9},
+ CellLabel->
+  "Out[307]=",ExpressionUUID->"f2e70ced-2323-424b-ab70-af97c8c7c91c"]
+}, Open  ]],
+
+Cell["and can be balanced by", "Text",
+ CellChangeTimes->{{3.900085436478631*^9, 
+  3.900085443008548*^9}},ExpressionUUID->"3df97712-ebed-407e-85a7-\
+d938ccad04d7"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReactionBalance", "[", 
+  RowBox[{
+  "ChemicalReaction", "[", "\"\<Mg(OH)2 -> Mg^(2+) + OH^(-)\>\"", "]"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.900085445828885*^9, 3.90008545767481*^9}},
+ CellLabel->
+  "In[308]:=",ExpressionUUID->"f31a4ebd-4bfa-43f7-a824-dfac56614cb1"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox["ChemicalReaction",
+    "SummaryHead"], "[", 
+   DynamicModuleBox[{Typeset`open$$ = False, Typeset`embedState$$ = "Ready"}, 
+    
+    TemplateBox[{
+      PaneSelectorBox[{False -> GridBox[{{
+            GridBox[{{
+               TagBox[
+                PaneBox[
+                 StyleBox[
+                  TemplateBox[{
+                    TemplateBox[{
+                    TagBox[
+                    TooltipBox[
+                    TemplateBox[{"\"Mg\"", 
+                    SubscriptBox[
+                    
+                    TemplateBox[{"\"(\"", "\"O\"", "\"H\"", "\")\""}, 
+                    "RowDefault"], "2"]}, "RowDefault"], 
+                    InterpretationBox[
+                    TagBox[
+                    TooltipBox[
+                    FrameBox[
+                    StyleBox[
+                    TemplateBox[{"\"Mg\"", 
+                    SubscriptBox[
+                    
+                    TemplateBox[{"\"(\"", "\"O\"", "\"H\"", "\")\""}, 
+                    "RowDefault"], "2"]}, "RowDefault"], FontFamily -> 
+                    "Roboto", ShowStringCharacters -> False, 
+                    ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> 
+                    False], RoundingRadius -> 5, 
+                    FrameMargins -> {{4, 4}, {3, 0}}, Alignment -> Center, 
+                    FrameStyle -> 
+                    RGBColor[0.403921568627451, 0.803921568627451, 
+                    0.9490196078431372], Background -> Dynamic[
+                    If[
+                    CurrentValue["MouseOver"], 
+                    RGBColor[0.9529411764705882, 0.9882352941176471, 1.], 
+                    White]], StripOnInput -> False], 
+                    TagBox[
+                    GridBox[{{"\"ChemicalFormula\""}, {
+                    TemplateBox[{"\"mass: \"", 
+                    
+                    TemplateBox[{"58.319`4.882358735080982", "\"u\"", 
+                    "unified atomic mass units", "\"AtomicMassUnit\""}, 
+                    "Quantity", SyntaxForm -> Mod]}, "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]], Annotation[#, 
+                    Column[{"ChemicalFormula", 
+                    Row[{"mass: ", 
+                    Quantity[58.319`4.882358735080982, "AtomicMassUnit"]}]}, 
+                    Alignment -> Left], "Tooltip"]& ], 
+                    ChemicalFormula[{"Mg" -> 1, {"O" -> 1, "H" -> 1} -> 2}], 
+                    Editable -> False, SelectWithContents -> True, Selectable -> 
+                    False]], Annotation[#, 
+                    ChemicalFormula[{"Mg" -> 1, {"O" -> 1, "H" -> 1} -> 2}], 
+                    "Tooltip"]& ]}, "RowDefault"], "\" \[LongRightArrow] \"", 
+                    
+                    TemplateBox[{
+                    TagBox[
+                    TooltipBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"Mg\""}, "RowDefault"], 
+                    TemplateBox[{"2", "\"+\""}, "RowDefault"]}, "Superscript",
+                     SyntaxForm -> SuperscriptBox], 
+                    InterpretationBox[
+                    TagBox[
+                    TooltipBox[
+                    FrameBox[
+                    StyleBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"Mg\""}, "RowDefault"], 
+                    TemplateBox[{"2", "\"+\""}, "RowDefault"]}, "Superscript",
+                     SyntaxForm -> SuperscriptBox], FontFamily -> "Roboto", 
+                    ShowStringCharacters -> False, 
+                    ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> 
+                    False], RoundingRadius -> 5, 
+                    FrameMargins -> {{4, 4}, {3, 2}}, Alignment -> Center, 
+                    FrameStyle -> 
+                    RGBColor[0.403921568627451, 0.803921568627451, 
+                    0.9490196078431372], Background -> Dynamic[
+                    If[
+                    CurrentValue["MouseOver"], 
+                    RGBColor[0.9529411764705882, 0.9882352941176471, 1.], 
+                    White]], StripOnInput -> False], 
+                    TagBox[
+                    GridBox[{{"\"ChemicalFormula\""}, {
+                    TemplateBox[{"\"mass: \"", 
+                    
+                    TemplateBox[{"24.3039028401818751886`4.999980392544869", 
+                    "\"u\"", "unified atomic mass units", 
+                    "\"AtomicMassUnit\""}, "Quantity", SyntaxForm -> Mod]}, 
+                    "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]], Annotation[#, 
+                    Column[{"ChemicalFormula", 
+                    Row[{"mass: ", 
+                    Quantity[
+                    24.3039028401818751886`4.999980392544869, 
+                    "AtomicMassUnit"]}]}, Alignment -> Left], "Tooltip"]& ], 
+                    ChemicalFormula[{"Mg" -> 1}, <|"NetCharge" -> 2|>], 
+                    Editable -> False, SelectWithContents -> True, Selectable -> 
+                    False]], Annotation[#, 
+                    ChemicalFormula[{"Mg" -> 1}, <|"NetCharge" -> 2|>], 
+                    "Tooltip"]& ], "\"\[ThinSpace]+\[ThinSpace]\"", 
+                    TagBox[
+                    TooltipBox[
+                    TemplateBox[{"2", "\"\[ThinSpace]\"", 
+                    TemplateBox[{
+                    TemplateBox[{"\"O\"", "\"H\""}, "RowDefault"], "\"-\""}, 
+                    "Superscript", SyntaxForm -> SuperscriptBox]}, 
+                    "RowDefault"], 
+                    InterpretationBox[
+                    TagBox[
+                    TooltipBox[
+                    FrameBox[
+                    StyleBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"O\"", "\"H\""}, "RowDefault"], "\"-\""}, 
+                    "Superscript", SyntaxForm -> SuperscriptBox], FontFamily -> 
+                    "Roboto", ShowStringCharacters -> False, 
+                    ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> 
+                    False], RoundingRadius -> 5, 
+                    FrameMargins -> {{4, 4}, {3, 2}}, Alignment -> Center, 
+                    FrameStyle -> 
+                    RGBColor[0.403921568627451, 0.803921568627451, 
+                    0.9490196078431372], Background -> Dynamic[
+                    If[
+                    CurrentValue["MouseOver"], 
+                    RGBColor[0.9529411764705882, 0.9882352941176471, 1.], 
+                    White]], StripOnInput -> False], 
+                    TagBox[
+                    GridBox[{{"\"ChemicalFormula\""}, {
+                    TemplateBox[{"\"mass: \"", 
+                    
+                    TemplateBox[{"17.0075485799090624057`4.814350784684973", 
+                    "\"u\"", "unified atomic mass units", 
+                    "\"AtomicMassUnit\""}, "Quantity", SyntaxForm -> Mod]}, 
+                    "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]], Annotation[#, 
+                    Column[{"ChemicalFormula", 
+                    Row[{"mass: ", 
+                    Quantity[
+                    17.0075485799090624057`4.814350784684973, 
+                    "AtomicMassUnit"]}]}, Alignment -> Left], "Tooltip"]& ], 
+                    
+                    ChemicalFormula[{"O" -> 1, "H" -> 1}, <|
+                    "NetCharge" -> -1|>], Editable -> False, 
+                    SelectWithContents -> True, Selectable -> False]], 
+                    Annotation[#, 
+                    
+                    ChemicalFormula[{"O" -> 1, "H" -> 1}, <|
+                    "NetCharge" -> -1|>], "Tooltip"]& ]}, "RowDefault"]}, 
+                   "RowDefault"], FontFamily -> "Roboto", "Medium", 
+                  ShowStringCharacters -> False, 
+                  ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> False],
+                  ImageSize -> {{1, 500}, Automatic}, BaselinePosition -> 
+                 Baseline, ContentPadding -> False, FrameMargins -> 0, 
+                 StripOnInput -> True], "SummaryItem"]}}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+             False, GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
+              BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+          GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Top}}}, 
+          AutoDelete -> False, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+          BaselinePosition -> {1, 1}], True -> GridBox[{{
+            GridBox[{{
+               TagBox[
+                PaneBox[
+                 StyleBox[
+                  TemplateBox[{
+                    TemplateBox[{
+                    TagBox[
+                    TooltipBox[
+                    TemplateBox[{"\"Mg\"", 
+                    SubscriptBox[
+                    
+                    TemplateBox[{"\"(\"", "\"O\"", "\"H\"", "\")\""}, 
+                    "RowDefault"], "2"]}, "RowDefault"], 
+                    InterpretationBox[
+                    TagBox[
+                    TooltipBox[
+                    FrameBox[
+                    StyleBox[
+                    TemplateBox[{"\"Mg\"", 
+                    SubscriptBox[
+                    
+                    TemplateBox[{"\"(\"", "\"O\"", "\"H\"", "\")\""}, 
+                    "RowDefault"], "2"]}, "RowDefault"], FontFamily -> 
+                    "Roboto", ShowStringCharacters -> False, 
+                    ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> 
+                    False], RoundingRadius -> 5, 
+                    FrameMargins -> {{4, 4}, {3, 0}}, Alignment -> Center, 
+                    FrameStyle -> 
+                    RGBColor[0.403921568627451, 0.803921568627451, 
+                    0.9490196078431372], Background -> Dynamic[
+                    If[
+                    CurrentValue["MouseOver"], 
+                    RGBColor[0.9529411764705882, 0.9882352941176471, 1.], 
+                    White]], StripOnInput -> False], 
+                    TagBox[
+                    GridBox[{{"\"ChemicalFormula\""}, {
+                    TemplateBox[{"\"mass: \"", 
+                    
+                    TemplateBox[{"58.319`4.882358735080982", "\"u\"", 
+                    "unified atomic mass units", "\"AtomicMassUnit\""}, 
+                    "Quantity", SyntaxForm -> Mod]}, "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]], Annotation[#, 
+                    Column[{"ChemicalFormula", 
+                    Row[{"mass: ", 
+                    Quantity[58.319`4.882358735080982, "AtomicMassUnit"]}]}, 
+                    Alignment -> Left], "Tooltip"]& ], 
+                    ChemicalFormula[{"Mg" -> 1, {"O" -> 1, "H" -> 1} -> 2}], 
+                    Editable -> False, SelectWithContents -> True, Selectable -> 
+                    False]], Annotation[#, 
+                    ChemicalFormula[{"Mg" -> 1, {"O" -> 1, "H" -> 1} -> 2}], 
+                    "Tooltip"]& ]}, "RowDefault"], "\" \[LongRightArrow] \"", 
+                    
+                    TemplateBox[{
+                    TagBox[
+                    TooltipBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"Mg\""}, "RowDefault"], 
+                    TemplateBox[{"2", "\"+\""}, "RowDefault"]}, "Superscript",
+                     SyntaxForm -> SuperscriptBox], 
+                    InterpretationBox[
+                    TagBox[
+                    TooltipBox[
+                    FrameBox[
+                    StyleBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"Mg\""}, "RowDefault"], 
+                    TemplateBox[{"2", "\"+\""}, "RowDefault"]}, "Superscript",
+                     SyntaxForm -> SuperscriptBox], FontFamily -> "Roboto", 
+                    ShowStringCharacters -> False, 
+                    ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> 
+                    False], RoundingRadius -> 5, 
+                    FrameMargins -> {{4, 4}, {3, 2}}, Alignment -> Center, 
+                    FrameStyle -> 
+                    RGBColor[0.403921568627451, 0.803921568627451, 
+                    0.9490196078431372], Background -> Dynamic[
+                    If[
+                    CurrentValue["MouseOver"], 
+                    RGBColor[0.9529411764705882, 0.9882352941176471, 1.], 
+                    White]], StripOnInput -> False], 
+                    TagBox[
+                    GridBox[{{"\"ChemicalFormula\""}, {
+                    TemplateBox[{"\"mass: \"", 
+                    
+                    TemplateBox[{"24.3039028401818751886`4.999980392544869", 
+                    "\"u\"", "unified atomic mass units", 
+                    "\"AtomicMassUnit\""}, "Quantity", SyntaxForm -> Mod]}, 
+                    "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]], Annotation[#, 
+                    Column[{"ChemicalFormula", 
+                    Row[{"mass: ", 
+                    Quantity[
+                    24.3039028401818751886`4.999980392544869, 
+                    "AtomicMassUnit"]}]}, Alignment -> Left], "Tooltip"]& ], 
+                    ChemicalFormula[{"Mg" -> 1}, <|"NetCharge" -> 2|>], 
+                    Editable -> False, SelectWithContents -> True, Selectable -> 
+                    False]], Annotation[#, 
+                    ChemicalFormula[{"Mg" -> 1}, <|"NetCharge" -> 2|>], 
+                    "Tooltip"]& ], "\"\[ThinSpace]+\[ThinSpace]\"", 
+                    TagBox[
+                    TooltipBox[
+                    TemplateBox[{"2", "\"\[ThinSpace]\"", 
+                    TemplateBox[{
+                    TemplateBox[{"\"O\"", "\"H\""}, "RowDefault"], "\"-\""}, 
+                    "Superscript", SyntaxForm -> SuperscriptBox]}, 
+                    "RowDefault"], 
+                    InterpretationBox[
+                    TagBox[
+                    TooltipBox[
+                    FrameBox[
+                    StyleBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"O\"", "\"H\""}, "RowDefault"], "\"-\""}, 
+                    "Superscript", SyntaxForm -> SuperscriptBox], FontFamily -> 
+                    "Roboto", ShowStringCharacters -> False, 
+                    ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> 
+                    False], RoundingRadius -> 5, 
+                    FrameMargins -> {{4, 4}, {3, 2}}, Alignment -> Center, 
+                    FrameStyle -> 
+                    RGBColor[0.403921568627451, 0.803921568627451, 
+                    0.9490196078431372], Background -> Dynamic[
+                    If[
+                    CurrentValue["MouseOver"], 
+                    RGBColor[0.9529411764705882, 0.9882352941176471, 1.], 
+                    White]], StripOnInput -> False], 
+                    TagBox[
+                    GridBox[{{"\"ChemicalFormula\""}, {
+                    TemplateBox[{"\"mass: \"", 
+                    
+                    TemplateBox[{"17.0075485799090624057`4.814350784684973", 
+                    "\"u\"", "unified atomic mass units", 
+                    "\"AtomicMassUnit\""}, "Quantity", SyntaxForm -> Mod]}, 
+                    "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]], Annotation[#, 
+                    Column[{"ChemicalFormula", 
+                    Row[{"mass: ", 
+                    Quantity[
+                    17.0075485799090624057`4.814350784684973, 
+                    "AtomicMassUnit"]}]}, Alignment -> Left], "Tooltip"]& ], 
+                    
+                    ChemicalFormula[{"O" -> 1, "H" -> 1}, <|
+                    "NetCharge" -> -1|>], Editable -> False, 
+                    SelectWithContents -> True, Selectable -> False]], 
+                    Annotation[#, 
+                    
+                    ChemicalFormula[{"O" -> 1, "H" -> 1}, <|
+                    "NetCharge" -> -1|>], "Tooltip"]& ]}, "RowDefault"]}, 
+                   "RowDefault"], FontFamily -> "Roboto", "Medium", 
+                  ShowStringCharacters -> False, 
+                  ScriptBaselineShifts -> {0.5, 0.75}, StripOnInput -> False],
+                  ImageSize -> {{1, 500}, Automatic}, BaselinePosition -> 
+                 Baseline, ContentPadding -> False, FrameMargins -> 0, 
+                 StripOnInput -> True], "SummaryItem"]}}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+             False, GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
+              BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+          GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Top}}}, 
+          AutoDelete -> False, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+          BaselinePosition -> {1, 1}]}, 
+       Dynamic[Typeset`open$$], ImageSize -> Automatic]},
+     "SummaryPanel"],
+    DynamicModuleValues:>{}], "]"}],
+  ChemicalReaction[<|
+    ChemicalFormula[{"Mg" -> 1, {"O" -> 1, "H" -> 1} -> 2}] -> 1|> -> <|
+    ChemicalFormula[{"Mg" -> 1}, <|"NetCharge" -> 2|>] -> 1, 
+     ChemicalFormula[{"O" -> 1, "H" -> 1}, <|"NetCharge" -> -1|>] -> 2|>],
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->False]], "Output",
+ CellChangeTimes->{3.900085457989832*^9, 3.900086248072353*^9},
+ CellLabel->
+  "Out[308]=",ExpressionUUID->"176809ab-cfa8-442a-835f-f2fcd779a62b"]
+}, Open  ]],
+
+Cell["\<\
+Trick for redox reactions: depending on acidic or basic solution use \
+trial-and-error for guessing the location of H^+ / OH^-\
+\>", "Text",
+ CellChangeTimes->{{3.900085466997423*^9, 
+  3.900085512834405*^9}},ExpressionUUID->"0d403938-c50a-4e67-969a-\
+73a21d80b57e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Lambda]", "=", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"15", ",", "\"\<cm\>\""}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.900127765323464*^9, 3.900127800524231*^9}, {
+  3.9001279494237223`*^9, 
+  3.900127951770976*^9}},ExpressionUUID->"dddfce59-5cae-4f48-8f56-\
+0168e2c2c78a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Quantity", "[", 
+   RowBox[{"4.184", ",", "\"\<J/(g*K)\>\""}], "]"}], "*", 
+  RowBox[{"Quantity", "[", 
+   RowBox[{"350", ",", "\"\<g\>\""}], "]"}], "*", 
+  RowBox[{"Quantity", "[", 
+   RowBox[{"75", ",", "\"\<Kelvins\>\""}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.900127969989964*^9, 3.900128032814537*^9}},
+ CellLabel->
+  "In[345]:=",ExpressionUUID->"c2bbc195-7de2-41b7-b0c3-a378dfc0340e"],
+
+Cell[BoxData[
+ TemplateBox[{"109830.`", "\"J\"", "joules", "\"Joules\""},
+  "Quantity"]], "Output",
+ CellChangeTimes->{
+  3.900127990064678*^9, {3.900128020483264*^9, 3.900128033721599*^9}},
+ CellLabel->
+  "Out[345]=",ExpressionUUID->"1a98d5e7-0141-4cb9-801d-4ba9eeaccac6"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"h", "*", 
+    RowBox[{"c", "/", "\[Lambda]"}]}], ")"}], "*", 
+  RowBox[{"Quantity", "[", 
+   RowBox[{"1", ",", "\"\<atom^(-1)\>\""}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.900128169690345*^9, 3.900128177155582*^9}, {
+  3.900128309086151*^9, 3.9001283551041117`*^9}},
+ CellLabel->
+  "In[353]:=",ExpressionUUID->"95f5e9fe-1aae-40b1-b022-83ee991fd5ea"],
+
+Cell[BoxData[
+ TemplateBox[{"1.3260000000000001`*^-24", 
+   RowBox[{
+    "\"J\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", "\"atom\""}], 
+   "joules per atom", 
+   FractionBox["\"Joules\"", "\"Atoms\""]},
+  "Quantity"]], "Output",
+ CellChangeTimes->{
+  3.900128177410626*^9, {3.9001283172310534`*^9, 3.900128355540697*^9}},
+ CellLabel->
+  "Out[353]=",ExpressionUUID->"f33e384f-21ac-4aad-88fa-b6f101123523"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"%345", "/", "%353"}]], "Input",
+ CellChangeTimes->{{3.900128185683036*^9, 3.900128191740964*^9}, {
+  3.900128328456587*^9, 3.900128356893238*^9}},
+ CellLabel->
+  "In[354]:=",ExpressionUUID->"77a2fea0-1357-4f92-86dd-8d0cbfa79c00"],
+
+Cell[BoxData[
+ TemplateBox[{"8.282805429864253`*^28", "\"atoms\"", "atoms", "\"Atoms\""},
+  "Quantity"]], "Output",
+ CellChangeTimes->{
+  3.900128192382785*^9, {3.900128323261033*^9, 3.9001283572567883`*^9}},
+ CellLabel->
+  "Out[354]=",ExpressionUUID->"8e74736f-e9b8-46a0-957f-880045fee276"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"Quantity", "[", 
+     RowBox[{"727", ",", "\"\<kJ/mol\>\""}], "]"}], "/", "NA"}], ")"}], "==", 
+  
+  RowBox[{"h", "*", 
+   RowBox[{"c", "/", "l"}]}]}]], "Input",
+ CellChangeTimes->{{3.900128646568452*^9, 3.900128679667179*^9}, {
+  3.90012895028345*^9, 3.90012899266402*^9}},
+ CellLabel->
+  "In[366]:=",ExpressionUUID->"b7aa4e96-933c-4f5f-b1f9-e95e62f79e8a"],
+
+Cell[BoxData[
+ RowBox[{
+  TemplateBox[{
+   "1.2072401195616077`*^-21", "\"kJ\"", "kilojoules", "\"Kilojoules\""},
+   "Quantity"], "\[Equal]", 
+  FractionBox[
+   TemplateBox[{"1.9890000000000003`*^-25", 
+     RowBox[{"\"m\"", "\[ThinSpace]", "\"J\""}], "meter joules", 
+     RowBox[{"\"Joules\"", " ", "\"Meters\""}]},
+    "Quantity"], "l"]}]], "Output",
+ CellChangeTimes->{
+  3.9001286469174356`*^9, {3.900128986523521*^9, 3.900128993052484*^9}},
+ CellLabel->
+  "Out[366]=",ExpressionUUID->"58e99a6d-65e2-4941-a59e-f5e0e0ed409d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", "%366", "]"}]], "Input",
+ CellChangeTimes->{{3.900128987656052*^9, 3.9001289968929033`*^9}},
+ CellLabel->
+  "In[367]:=",ExpressionUUID->"3546533b-16fd-41bf-ab87-6560e90d7c77"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    TemplateBox[{"1.9890000000000003`*^-25", 
+      RowBox[{"\"m\"", "\[ThinSpace]", "\"J\""}], "meter joules", 
+      RowBox[{"\"Joules\"", " ", "\"Meters\""}]},
+     "Quantity"], "\[Rule]", 
+    RowBox[{"l", " ", 
+     RowBox[{"(", 
+      TemplateBox[{
+       "1.2072401195616077`*^-21", "\"kJ\"", "kilojoules", "\"Kilojoules\""},
+       "Quantity"], ")"}]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.900128997372497*^9},
+ CellLabel->
+  "Out[367]=",ExpressionUUID->"23e879dd-59d7-4a68-ac80-ea140abe469e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Quantity", "[", 
+  RowBox[{
+   RowBox[{"1.989", "*", 
+    RowBox[{
+     RowBox[{"10", "^", 
+      RowBox[{"(", 
+       RowBox[{"-", "25"}], ")"}]}], "/", 
+     RowBox[{"(", 
+      RowBox[{"1.2", "*", 
+       RowBox[{"10", "^", 
+        RowBox[{"(", 
+         RowBox[{"-", "21"}], ")"}]}]}], ")"}]}]}], ",", "\"\<m*J/kJ\>\""}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.90012900149116*^9, 3.900129022764208*^9}},
+ CellLabel->
+  "In[369]:=",ExpressionUUID->"45d3ab22-73ce-4d0f-a34e-241fbbbe0cbd"],
+
+Cell[BoxData[
+ TemplateBox[{"0.00016575000000000002`", 
+   RowBox[{
+    "\"m\"", "\[ThinSpace]", "\"J\"", "\[InvisibleSpace]", "\"/\"", 
+     "\[InvisibleSpace]", "\"kJ\""}], "meter joules per kilojoule", 
+   FractionBox[
+    RowBox[{"\"Joules\"", " ", "\"Meters\""}], "\"Kilojoules\""]},
+  "Quantity"]], "Output",
+ CellChangeTimes->{{3.900129011400319*^9, 3.90012902383818*^9}},
+ CellLabel->
+  "Out[369]=",ExpressionUUID->"98d2a9d9-fc89-45e6-b6d4-edd103e1c4b0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"UnitSimplify", "[", 
+  RowBox[{"Quantity", "[", 
+   RowBox[{"0.00016575000000000002`", ",", 
+    FractionBox[
+     RowBox[{"\"\<Joules\>\"", " ", "\"\<Meters\>\""}], 
+     "\"\<Kilojoules\>\""]}], "]"}], "]"}]], "Input",
+ NumberMarks->False,
+ CellLabel->
+  "In[370]:=",ExpressionUUID->"200dfcce-b0a4-4a1e-ab78-3c09a4ca391c"],
+
+Cell[BoxData[
+ TemplateBox[{"0.16575`", "\"\[Mu]m\"", "micrometers", "\"Micrometers\""},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.900129026262128*^9},
+ CellLabel->
+  "Out[370]=",ExpressionUUID->"1a0826b5-428f-454d-b9bf-09a8cc488e2e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"UnitConvert", "[", 
+  RowBox[{
+   RowBox[{"Quantity", "[", 
+    RowBox[{"0.16575`", ",", "\"\<Micrometers\>\""}], "]"}], ",", 
+   "\"\<nm\>\""}], "]"}]], "Input",
+ NumberMarks->False,
+ CellLabel->
+  "In[371]:=",ExpressionUUID->"3f44ec98-7f3e-476b-8dcb-da4e1ac39229"],
+
+Cell[BoxData[
+ TemplateBox[{"165.75`", "\"nm\"", "nanometers", "\"Nanometers\""},
+  "Quantity"]], "Output",
+ CellChangeTimes->{3.9001290361824703`*^9},
+ CellLabel->
+  "Out[371]=",ExpressionUUID->"dea3fabb-ec55-4f08-9451-a7d5fdefd405"]
+}, Open  ]]
+},
+WindowSize->{899, 941},
+WindowMargins->{{Automatic, 6}, {Automatic, 38}},
+Magnification:>1.5 Inherited,
+FrontEndVersion->"13.2 for Mac OS X ARM (64-bit) (November 18, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"29b131d5-83a2-427f-8af9-be6d972eb5c5"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 411, 8, 88, "Text",ExpressionUUID->"e73c85ba-55f1-4aa8-8502-1c94d634ff56"],
+Cell[972, 30, 1570, 46, 171, "Input",ExpressionUUID->"455475e4-125c-4574-a34f-6a88e0740b11"],
+Cell[2545, 78, 183, 3, 53, "Text",ExpressionUUID->"a761e629-c8af-4f6a-97ee-c40283a0516c"],
+Cell[CellGroupData[{
+Cell[2753, 85, 235, 4, 46, "Input",ExpressionUUID->"af1e5930-e970-4348-8e3e-103023a0f2c7"],
+Cell[2991, 91, 1780, 50, 63, "Output",ExpressionUUID->"51fd5448-4ba6-4f29-83de-239373bc6088"]
+}, Open  ]],
+Cell[4786, 144, 168, 3, 53, "Text",ExpressionUUID->"749a8e08-c789-40ed-af02-1e363ffac7f0"],
+Cell[CellGroupData[{
+Cell[4979, 151, 281, 6, 46, "Input",ExpressionUUID->"54d34d1c-0613-4b44-b441-586ea5ffed19"],
+Cell[5263, 159, 607, 11, 146, "Output",ExpressionUUID->"ecc3fb9d-1800-45e4-bd99-74eda39c45aa"]
+}, Open  ]],
+Cell[5885, 173, 151, 3, 53, "Text",ExpressionUUID->"a7edb8b7-f144-4125-a01b-2108e9295faa"],
+Cell[CellGroupData[{
+Cell[6061, 180, 279, 6, 46, "Input",ExpressionUUID->"0e228870-fa86-4e15-8f6d-8601bca5a930"],
+Cell[6343, 188, 400, 9, 56, "Output",ExpressionUUID->"96ea950c-74e7-40bc-b51c-10bb8fda0193"]
+}, Open  ]],
+Cell[6758, 200, 182, 3, 53, "Text",ExpressionUUID->"aef0c893-09a2-48e7-8a6c-12cc54794dd8"],
+Cell[CellGroupData[{
+Cell[6965, 207, 255, 5, 46, "Input",ExpressionUUID->"403dc305-eef7-4567-b239-094c0e349975"],
+Cell[7223, 214, 18917, 370, 77, "Output",ExpressionUUID->"f2e70ced-2323-424b-ab70-af97c8c7c91c"]
+}, Open  ]],
+Cell[26155, 587, 164, 3, 53, "Text",ExpressionUUID->"3df97712-ebed-407e-85a7-d938ccad04d7"],
+Cell[CellGroupData[{
+Cell[26344, 594, 299, 7, 78, "Input",ExpressionUUID->"f31a4ebd-4bfa-43f7-a824-dfac56614cb1"],
+Cell[26646, 603, 19128, 375, 77, "Output",ExpressionUUID->"176809ab-cfa8-442a-835f-f2fcd779a62b"]
+}, Open  ]],
+Cell[45789, 981, 276, 6, 88, "Text",ExpressionUUID->"0d403938-c50a-4e67-969a-73a21d80b57e"],
+Cell[46068, 989, 323, 8, 46, "Input",ExpressionUUID->"dddfce59-5cae-4f48-8f56-0168e2c2c78a"],
+Cell[CellGroupData[{
+Cell[46416, 1001, 428, 10, 78, "Input",ExpressionUUID->"c2bbc195-7de2-41b7-b0c3-a378dfc0340e"],
+Cell[46847, 1013, 273, 6, 52, "Output",ExpressionUUID->"1a98d5e7-0141-4cb9-801d-4ba9eeaccac6"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47157, 1024, 404, 10, 46, "Input",ExpressionUUID->"95f5e9fe-1aae-40b1-b022-83ee991fd5ea"],
+Cell[47564, 1036, 416, 10, 56, "Output",ExpressionUUID->"f33e384f-21ac-4aad-88fa-b6f101123523"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48017, 1051, 253, 5, 46, "Input",ExpressionUUID->"77a2fea0-1357-4f92-86dd-8d0cbfa79c00"],
+Cell[48273, 1058, 291, 6, 55, "Output",ExpressionUUID->"8e74736f-e9b8-46a0-957f-880045fee276"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48601, 1069, 422, 12, 46, "Input",ExpressionUUID->"b7aa4e96-933c-4f5f-b1f9-e95e62f79e8a"],
+Cell[49026, 1083, 529, 13, 78, "Output",ExpressionUUID->"58e99a6d-65e2-4941-a59e-f5e0e0ed409d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49592, 1101, 212, 4, 46, "Input",ExpressionUUID->"3546533b-16fd-41bf-ab87-6560e90d7c77"],
+Cell[49807, 1107, 570, 15, 63, "Output",ExpressionUUID->"23e879dd-59d7-4a68-ac80-ea140abe469e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50414, 1127, 518, 16, 46, "Input",ExpressionUUID->"45d3ab22-73ce-4d0f-a34e-241fbbbe0cbd"],
+Cell[50935, 1145, 462, 10, 53, "Output",ExpressionUUID->"98d2a9d9-fc89-45e6-b6d4-edd103e1c4b0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51434, 1160, 348, 9, 73, "Input",ExpressionUUID->"200dfcce-b0a4-4a1e-ab78-3c09a4ca391c"],
+Cell[51785, 1171, 239, 5, 55, "Output",ExpressionUUID->"1a0826b5-428f-454d-b9bf-09a8cc488e2e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[52061, 1181, 290, 8, 46, "Input",ExpressionUUID->"3f44ec98-7f3e-476b-8dcb-da4e1ac39229"],
+Cell[52354, 1191, 234, 5, 52, "Output",ExpressionUUID->"dea3fabb-ec55-4f08-9451-a7d5fdefd405"]
+}, Open  ]]
+}
+]
+*)
+
